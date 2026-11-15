@@ -1,0 +1,6 @@
+# Activar la página de mantenimiento en Netlify
+# 1. Copie este archivo dentro de la carpeta que sube a Netlify (SAOCA-WEB-publicar)
+#    y renómbrelo exactamente como: _redirects   (sin extensión)
+# 2. Suba la carpeta en Netlify (pestaña Deploys). Todo el sitio mostrará mantenimiento.html.
+# 3. Para volver a la web normal, borre _redirects de la carpeta y súbala de nuevo.
+/*    /mantenimiento.html    200!

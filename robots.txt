@@ -1,0 +1,9 @@
+# robots.txt — SAOCA (Servicios Ambientales Oriente, C.A.)
+# Se permite rastrear todo el sitio, incluidos CSS, JS e imágenes necesarios para renderizarlo.
+User-agent: *
+Allow: /
+Disallow: /herramientas/
+Disallow: /assets/originales/
+
+# La línea del sitemap se activa al ejecutar: node herramientas/configurar-dominio.js https://www.su-dominio.com
+# Sitemap: https://www.DOMINIO-PENDIENTE.com/sitemap.xml

@@ -1,0 +1,8 @@
+# Fotos originales en alta resolución (~88 MB): la web no las usa y algunas muestran
+# matrículas o personas que se recortaron en las versiones publicadas. Se guardan solo en el equipo.
+assets/originales/
+
+# Archivos del sistema
+Thumbs.db
+desktop.ini
+.DS_Store

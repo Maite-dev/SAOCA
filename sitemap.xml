@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Las URL usan un dominio provisional. Ejecute: node herramientas/configurar-dominio.js https://www.su-dominio.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.DOMINIO-PENDIENTE.com/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.DOMINIO-PENDIENTE.com/nosotros.html</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.DOMINIO-PENDIENTE.com/servicios.html</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.DOMINIO-PENDIENTE.com/contacto.html</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+</urlset>
