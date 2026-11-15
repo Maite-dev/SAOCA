@@ -8,7 +8,7 @@
      Si cambian, actualícelos aquí y en el HTML (ver GUIA-DE-MANTENIMIENTO.md). */
   var CONFIG = {
     whatsapp: '584147666094',                 // Número internacional sin "+" ni espacios
-    correoCotizaciones: 'contacto@saoca.com.ve',
+    correoCotizaciones: 'info@saoca.com.ve',
     telefono: { mostrar: '0414-7666094', enlace: '+584147666094' },
     // Clave gratuita de Web3Forms (web3forms.com): se obtiene con el correo que recibirá las solicitudes.
     // Mientras esté vacía, el formulario abre la aplicación de correo del visitante con la solicitud redactada.
