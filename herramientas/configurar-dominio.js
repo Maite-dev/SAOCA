@@ -44,11 +44,12 @@ for (const name of FILES) {
   }
   if (name.endsWith('.html')) {
     // Datos estructurados: rutas relativas a URL absolutas; la empresa y el sitio comparten identificador en todas las páginas
-    const pageUrl = name === 'index.html' ? input + '/' : input + '/' + name;
+    const pageUrl = name === 'index.html' ? input + '/' : input + '/' + name.replace(/\.html$/, '');
     const abs = v => /^https?:/.test(v) ? v
-      : v === 'index.html' ? input + '/'
+      : v === 'index.html' || v === '/' ? input + '/'
+      : /^\/?[a-z-]+(\.html)?(#.*)?$/.test(v) && !v.startsWith('#') ? input + '/' + v.replace(/^\//, '').replace(/\.html(?=#|$)/, '')
       : v.startsWith('#') ? (/^#(organizacion|sitio)$/.test(v) ? input + '/' + v : pageUrl + v)
-      : input + '/' + v;
+      : input + '/' + v.replace(/^\//, '');
     s = s.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, block =>
       block.replace(/("(?:@id|url|logo|image|item)":\s*")([^"]+)"/g, (m, key, v) => key + abs(v) + '"'));
   }

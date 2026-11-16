@@ -1,0 +1,6 @@
+# SAOCA — URL limpias en Netlify (equivalente al .htaccess, que Netlify no lee).
+# Netlify ya sirve /contacto con contacto.html; estas reglas llevan las direcciones antiguas a la versión limpia.
+/index.html      /            301!
+/nosotros.html   /nosotros    301!
+/servicios.html  /servicios   301!
+/contacto.html   /contacto    301!

@@ -1,0 +1,37 @@
+# SAOCA — URL limpias: https://www.saoca.com.ve/contacto sirve contacto.html
+# Para servidores Apache o LiteSpeed (por ejemplo, el hosting de Namecheap).
+# Netlify no lee este archivo: allí se usa _redirects.
+
+Options -MultiViews
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Dominio definitivo con HTTPS y www (solo afecta a saoca.com.ve)
+  RewriteCond %{HTTP_HOST} ^saoca\.com\.ve$ [NC]
+  RewriteRule ^ https://www.saoca.com.ve%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} ^www\.saoca\.com\.ve$ [NC]
+  RewriteRule ^ https://www.saoca.com.ve%{REQUEST_URI} [L,R=301]
+
+  # 2. /index.html y /index → /
+  RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
+  RewriteRule ^ / [L,R=301]
+
+  # 3. /pagina.html → /pagina (solo lo que pide el navegador; así la regla 5 no entra en bucle)
+  RewriteCond %{THE_REQUEST} \s/+([^?\s]+?)\.html[\s?] [NC]
+  RewriteCond %1 !^404$
+  RewriteRule ^ /%1 [L,R=301]
+
+  # 4. Sin barra final: /contacto/ → /contacto
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+  # 5. /pagina → pagina.html, si el archivo existe
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([^/.]+)$ $1.html [L]
+</IfModule>

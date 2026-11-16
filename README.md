@@ -15,6 +15,15 @@ Sitio estático en HTML, CSS y JavaScript, sin compilación: se publica tal cual
 | `404.html` | Página no encontrada |
 | `mantenimiento.html` | Sitio en mantenimiento (se activa con `herramientas/_redirects-mantenimiento`) |
 
+## URL limpias
+
+Las páginas se publican sin extensión: `/`, `/nosotros`, `/servicios`, `/contacto`. Los archivos siguen siendo `.html`; las direcciones antiguas con `.html` redirigen (301) a la versión limpia.
+
+- `.htaccess` — reglas para servidores Apache o LiteSpeed (por ejemplo, el hosting de Namecheap).
+- `_redirects` — las mismas reglas para Netlify, que no lee `.htaccess`.
+
+Los enlaces y recursos usan rutas desde la raíz (`/contacto`, `/assets/...`), por lo que el sitio debe verse a través de un servidor, no abriendo los archivos con doble clic.
+
 ## Carpetas
 
 - `css/styles.css` — estilos del sitio.
