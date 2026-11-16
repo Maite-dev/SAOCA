@@ -8,7 +8,8 @@
   Qué hace:
     1. Sustituye el dominio provisional (o el anterior) en las 4 páginas, sitemap.xml y robots.txt.
     2. Activa las etiquetas canonical, og:url, og:image y twitter:image (bloque SEO-DOMINIO).
-    3. Activa la línea "Sitemap:" de robots.txt.
+    3. Activa la línea "Sitemap:" de robots.txt y pone la fecha del día en sitemap.xml.
+    4. Convierte en URL completas las rutas de los datos estructurados (Google las requiere absolutas).
   Puede ejecutarse de nuevo si el dominio cambia.
 */
 const fs = require('fs');
@@ -37,7 +38,20 @@ for (const name of FILES) {
   // Activa el bloque de metadatos que dependen del dominio
   s = s.replace(/<!-- SEO-DOMINIO:[^\n]*\n([\s\S]*?)\s*FIN-SEO-DOMINIO -->/g, '<!-- SEO-DOMINIO (activo) -->\n$1');
   if (name === 'robots.txt') s = s.replace(/^# Sitemap: /m, 'Sitemap: ');
-  if (name === 'sitemap.xml') s = s.replace(/<!-- Las URL usan un dominio provisional[^>]*-->\n/, '');
+  if (name === 'sitemap.xml') {
+    s = s.replace(/<!-- Las URL usan un dominio provisional[^>]*-->\n/, '');
+    s = s.replace(/<lastmod>[^<]*<\/lastmod>/g, '<lastmod>' + new Date().toISOString().slice(0, 10) + '</lastmod>');
+  }
+  if (name.endsWith('.html')) {
+    // Datos estructurados: rutas relativas a URL absolutas; la empresa y el sitio comparten identificador en todas las páginas
+    const pageUrl = name === 'index.html' ? input + '/' : input + '/' + name;
+    const abs = v => /^https?:/.test(v) ? v
+      : v === 'index.html' ? input + '/'
+      : v.startsWith('#') ? (/^#(organizacion|sitio)$/.test(v) ? input + '/' + v : pageUrl + v)
+      : input + '/' + v;
+    s = s.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, block =>
+      block.replace(/("(?:@id|url|logo|image|item)":\s*")([^"]+)"/g, (m, key, v) => key + abs(v) + '"'));
+  }
   if (s !== before) { fs.writeFileSync(file, s); changed++; console.log('  actualizado:', name); }
 }
 
